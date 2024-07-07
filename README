@@ -1,0 +1,47 @@
+# Stripe API
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Run](#run)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+
+## Requirements
+
+- Python >= 3.11.x
+- A stripe account with stripe connect configured
+- Stripe CLI (for debug mode)
+- A Firestore Database created
+
+## Installation
+
+1- Install stripe-cli and log in, it is necessary to forward the stripe notifications to the local webhook
+The documentation specifies the steps, it depends of the OS "https://docs.stripe.com/stripe-cli" (only for debug mode)
+
+2- Listen to webhook events
+run "stripe listen --forward-to localhost:5000/webhook_callbacks" in a terminal
+This command will help stripe to send the events (only for debug mode)
+
+3- Create a file called ".env" in the project root
+
+4- Fill it with the content from ".env_example" file
+
+5- Set the right content
+STRIPE_API -> Can be created from stripe dashboard -> development -> api key. It is the private key, begins with "sk".
+STRIPE_WEBHOOK_SECRET -> You will get it in step #2, the token begins with "whsec"
+DATABASE_URL -> Firestore database URL
+FIREBASE_CREDENTIALS_PATH -> The path of the firebase json configuration
+
+6- Install the requirements.txt
+run "pip install -r requirements.txt"
+
+7- run the project
+
+8- After everything is working, we will need to:
+    8.1 - Initialize the memberships
+    8.2 - Set the company_type from the companies
+    8.3 - Set the tutors cost and pay
+
+9- We can do it with swagger "http://localhost:5000/apidocs"
